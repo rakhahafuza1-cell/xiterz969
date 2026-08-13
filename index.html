@@ -1,0 +1,1080 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>XITERZ 969</title>
+
+<style>
+*{
+    box-sizing:border-box;
+}
+
+html,body{
+    margin:0;
+    min-height:100%;
+}
+
+body{
+    min-height:100vh;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    padding:20px;
+    font-family:Arial,sans-serif;
+    color:white;
+
+    background:
+        radial-gradient(
+            circle at 50% 5%,
+            #7012b0 0%,
+            transparent 38%
+        ),
+        radial-gradient(
+            circle at 0% 100%,
+            #31005b 0%,
+            transparent 42%
+        ),
+        #07030c;
+}
+
+body::before{
+    content:"";
+    position:fixed;
+    inset:0;
+
+    background-image:
+        linear-gradient(
+            #9b30ff 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            #9b30ff 1px,
+            transparent 1px
+        );
+
+    background-size:52px 52px;
+    opacity:.08;
+    pointer-events:none;
+}
+
+.box{
+    position:relative;
+
+    width:92%;
+    max-width:520px;
+
+    padding:40px 30px;
+
+    background:rgba(8,4,15,.97);
+
+    border:1px solid #a020f0;
+    border-radius:24px;
+
+    text-align:center;
+
+    box-shadow:
+        0 0 20px #7b1fd4,
+        0 0 55px rgba(160,32,240,.42);
+
+    z-index:1;
+}
+
+.logo{
+    font-size:60px;
+
+    color:#d99aff;
+
+    text-shadow:
+        0 0 12px #b84cff,
+        0 0 30px #8a2be2,
+        0 0 60px #8a2be2;
+}
+
+h1,h2{
+    margin:8px 0;
+
+    color:#d99aff;
+
+    font-size:30px;
+
+    letter-spacing:5px;
+
+    text-shadow:
+        0 0 12px rgba(190,80,255,.6);
+}
+
+.subtitle{
+    color:#96859f;
+
+    font-size:12px;
+
+    letter-spacing:3px;
+
+    margin:10px 0 30px;
+}
+
+input{
+    width:100%;
+
+    padding:17px;
+
+    background:#100818;
+
+    color:white;
+
+    border:1px solid #4b176c;
+
+    border-radius:11px;
+
+    outline:none;
+
+    font-size:16px;
+
+    text-align:center;
+}
+
+input:focus{
+    border-color:#c45cff;
+
+    box-shadow:
+        0 0 12px rgba(196,92,255,.45);
+}
+
+button,
+.download{
+    width:100%;
+
+    padding:16px;
+
+    margin-top:15px;
+
+    display:block;
+
+    border:none;
+
+    border-radius:10px;
+
+    color:white;
+
+    background:
+        linear-gradient(
+            90deg,
+            #6813a5,
+            #a020f0,
+            #6813a5
+        );
+
+    font-size:14px;
+
+    font-weight:bold;
+
+    letter-spacing:2px;
+
+    text-decoration:none;
+
+    cursor:pointer;
+
+    box-shadow:
+        0 0 16px rgba(160,32,240,.45);
+
+    transition:.2s;
+}
+
+button:hover,
+.download:hover{
+    transform:scale(1.02);
+
+    box-shadow:
+        0 0 25px rgba(160,32,240,.7);
+}
+
+button:active{
+    transform:scale(.98);
+}
+
+.result{
+    min-height:22px;
+
+    margin-top:17px;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+.error{
+    color:#ff6b9d;
+}
+
+.success{
+    color:#65ff9a;
+}
+
+.info{
+    margin-top:22px;
+
+    color:#8e7c97;
+
+    font-size:11px;
+
+    line-height:1.7;
+}
+
+.card{
+    text-align:left;
+
+    margin:18px 0;
+
+    padding:22px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(25,10,35,.97),
+            rgba(12,5,18,.97)
+        );
+
+    border:1px solid #42135c;
+
+    border-radius:15px;
+
+    box-shadow:
+        inset 0 0 20px
+        rgba(160,32,240,.04);
+}
+
+.card-title{
+    color:#d99aff;
+
+    font-size:20px;
+
+    font-weight:bold;
+
+    margin-bottom:10px;
+}
+
+.card-info{
+    color:#aaa;
+
+    font-size:13px;
+
+    line-height:1.6;
+
+    margin-bottom:14px;
+}
+
+.note{
+    margin-top:13px;
+
+    padding:12px;
+
+    background:
+        rgba(160,32,240,.08);
+
+    border-left:3px solid #a020f0;
+
+    border-radius:6px;
+
+    color:#c7b2cc;
+
+    font-size:11px;
+
+    line-height:1.6;
+}
+
+.code-box{
+    padding:17px;
+
+    text-align:center;
+
+    background:
+        rgba(0,0,0,.4);
+
+    border:1px solid #4b176c;
+
+    border-radius:9px;
+
+    margin-top:12px;
+}
+
+.code-label{
+    color:#8e7c97;
+
+    font-size:10px;
+
+    letter-spacing:2px;
+
+    margin-bottom:8px;
+}
+
+.code{
+    color:#e4b8ff;
+
+    font-size:22px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    text-shadow:
+        0 0 10px #8a2be2;
+
+    user-select:text;
+
+    -webkit-user-select:text;
+}
+
+.timer{
+    margin:10px 0 20px;
+
+    color:#c77dff;
+
+    font-size:13px;
+
+    font-weight:bold;
+}
+
+.credit{
+    margin-top:25px;
+
+    padding-top:18px;
+
+    border-top:1px solid #321142;
+
+    color:#a875c5;
+
+    font-size:12px;
+
+    font-weight:bold;
+
+    letter-spacing:3px;
+
+    text-shadow:
+        0 0 10px #8a2be2;
+}
+
+.hidden{
+    display:none;
+}
+
+@media(max-width:430px){
+
+    .box{
+        width:96%;
+
+        padding:34px 23px;
+    }
+
+    .logo{
+        font-size:52px;
+    }
+
+    h1,h2{
+        font-size:26px;
+
+        letter-spacing:4px;
+    }
+
+    .code{
+        font-size:19px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- =========================
+     LOGIN PAGE
+========================= -->
+
+<div class="box" id="loginPage">
+
+    <div class="logo">
+        ◈
+    </div>
+
+    <h1>
+        XITERZ 969
+    </h1>
+
+    <div class="subtitle">
+        PRIVATE ACCESS
+    </div>
+
+    <input
+        id="keyInput"
+        type="text"
+        placeholder="MASUKKAN XITERZ KEY"
+        autocomplete="off"
+    >
+
+    <button onclick="login()">
+        🔐 ACCESS
+    </button>
+
+    <div
+        id="result"
+        class="result"
+    ></div>
+
+    <div class="info">
+        🔑 KEY ACCESS DIPERLUKAN<br>
+        ⏱️ AKSES BERLAKU 24 JAM
+    </div>
+
+    <div class="credit">
+        CREDIT BY XITERZ 969
+    </div>
+
+</div>
+
+
+
+<!-- =========================
+     CONTENT PAGE
+========================= -->
+
+<div
+    class="box hidden"
+    id="contentPage"
+>
+
+    <div class="logo">
+        ◈
+    </div>
+
+    <h2>
+        XITERZ 969
+    </h2>
+
+    <div class="subtitle">
+        ACCESS GRANTED
+    </div>
+
+    <div
+        id="timer"
+        class="timer"
+    >
+        🟢 KEY ACTIVE
+    </div>
+
+
+    <!-- VPN -->
+
+    <div class="card">
+
+        <div class="card-title">
+            🟢 VPN NO ADS
+        </div>
+
+        <div class="card-info">
+            VPN India tanpa iklan.
+        </div>
+
+        <a
+            class="download"
+            href="https://www.mediafire.com/file/xyl3ga3m01tadx0/VPN_India_1.147.apk/file"
+            target="_blank"
+            rel="noopener noreferrer"
+        >
+            DOWNLOAD VPN
+        </a>
+
+        <div class="note">
+
+            ⚠️ <b>NOTE:</b><br>
+
+            Ganti server VPN setiap kali
+            mau claim trial code.
+
+        </div>
+
+    </div>
+
+
+    <!-- TRIAL CODE -->
+
+    <div class="card">
+
+        <div class="card-title">
+            🔴 CODE FREE TRIAL 4 JAM
+        </div>
+
+        <div class="card-info">
+            Gunakan kode berikut untuk free trial.
+        </div>
+
+
+        <div class="code-box">
+
+            <div class="code-label">
+                TRIAL CODE
+            </div>
+
+            <div
+                class="code"
+                id="trialCode"
+            >
+                1CNA6RRNK
+            </div>
+
+        </div>
+
+
+        <button onclick="copyCode()">
+            📋 COPY CODE
+        </button>
+
+
+        <div
+            id="copyResult"
+            class="result"
+        ></div>
+
+    </div>
+
+
+    <button onclick="logout()">
+        🚪 LOGOUT
+    </button>
+
+
+    <div class="credit">
+        CREDIT BY XITERZ 969
+    </div>
+
+</div>
+
+
+
+<script>
+
+
+/* =========================================
+   100 KEY
+========================================= */
+
+const keys = {
+
+"XITERZ-A7K9-X2PM":true,
+"XITERZ-Q4ZT-8NLR":true,
+"XITERZ-M8CX-3VPA":true,
+"XITERZ-K2FD-9QWX":true,
+"XITERZ-R7HN-4BZY":true,
+"XITERZ-P5LM-8KTC":true,
+"XITERZ-X9QA-2DVR":true,
+"XITERZ-B3NW-7HFK":true,
+"XITERZ-Z6RP-4MJC":true,
+"XITERZ-T8VX-1QAL":true,
+
+"XITERZ-C4KP-9ZND":true,
+"XITERZ-H7XM-2RVB":true,
+"XITERZ-N5QF-8LTC":true,
+"XITERZ-W2JA-6PKR":true,
+"XITERZ-Y9MD-3XQH":true,
+"XITERZ-F8RL-5VNC":true,
+"XITERZ-D6TZ-1KPW":true,
+"XITERZ-J3XB-7QMA":true,
+"XITERZ-L9CH-4RVT":true,
+"XITERZ-V5NK-8ZPD":true,
+
+"XITERZ-A2QW-6MFR":true,
+"XITERZ-G7KP-9XTC":true,
+"XITERZ-S4ZN-2HVL":true,
+"XITERZ-E8RM-5QBX":true,
+"XITERZ-U3FD-7KNP":true,
+"XITERZ-I6VA-1ZQW":true,
+"XITERZ-O9XC-4LMT":true,
+"XITERZ-P2RH-8DJK":true,
+"XITERZ-B7QM-3VXF":true,
+"XITERZ-K5TZ-6NRA":true,
+
+"XITERZ-X4LP-9QMC":true,
+"XITERZ-R8NW-2FVK":true,
+"XITERZ-M3JD-7ZQA":true,
+"XITERZ-T6HC-1PXR":true,
+"XITERZ-Q9VB-5KLF":true,
+"XITERZ-N2ZA-8WMT":true,
+"XITERZ-F7RX-4QPD":true,
+"XITERZ-C5KM-6HNV":true,
+"XITERZ-J8QT-3LWA":true,
+"XITERZ-D4PF-9XRB":true,
+
+"XITERZ-V6NK-2QTM":true,
+"XITERZ-Y3HC-7ZLP":true,
+"XITERZ-A9RW-5KXD":true,
+"XITERZ-G2VF-8MNC":true,
+"XITERZ-S7QA-1RZT":true,
+"XITERZ-E4LX-6PKM":true,
+"XITERZ-U8ND-3QWR":true,
+"XITERZ-I5ZT-9HVC":true,
+"XITERZ-O2KM-7XFD":true,
+"XITERZ-P6RB-4NQA":true,
+
+"XITERZ-B9WC-2LMT":true,
+"XITERZ-K3QX-8VNR":true,
+"XITERZ-X7FD-5JPA":true,
+"XITERZ-R2ZM-9QKC":true,
+"XITERZ-M6HV-1TXB":true,
+"XITERZ-T4NK-7WQP":true,
+"XITERZ-Q8LC-3ZMR":true,
+"XITERZ-N5XA-6FKD":true,
+"XITERZ-F2PV-9RWT":true,
+"XITERZ-C7QM-4HNX":true,
+
+"XITERZ-J9ZA-2KRF":true,
+"XITERZ-D3LX-8VPC":true,
+"XITERZ-V7NW-5QMA":true,
+"XITERZ-Y4KT-1ZRX":true,
+"XITERZ-A8HC-6PLN":true,
+"XITERZ-G5RD-3QVK":true,
+"XITERZ-S2XM-9NTA":true,
+"XITERZ-E7QF-4KLP":true,
+"XITERZ-U3ZR-8WNC":true,
+"XITERZ-I9MK-2XFD":true,
+
+"XITERZ-O6VP-5RQA":true,
+"XITERZ-P4LN-7ZKC":true,
+"XITERZ-B8XW-3MTR":true,
+"XITERZ-K2QD-9FVN":true,
+"XITERZ-X5JA-6RLP":true,
+"XITERZ-R7MC-1QZT":true,
+"XITERZ-M9VK-4HXD":true,
+"XITERZ-T3NF-8PQA":true,
+"XITERZ-Q6ZR-2KWC":true,
+"XITERZ-N4LP-7XMT":true,
+
+"XITERZ-F8QA-5RND":true,
+"XITERZ-C2VK-9ZLP":true,
+"XITERZ-J6XM-3QTR":true,
+"XITERZ-D9NW-1KFC":true,
+"XITERZ-V5RQ-8MZA":true,
+"XITERZ-Y2HT-4PLK":true,
+"XITERZ-A7XC-6QVN":true,
+"XITERZ-G3LM-9RZT":true,
+"XITERZ-S8KP-2XFD":true,
+"XITERZ-E5NW-7QMC":true,
+
+"XITERZ-U9ZR-4KPL":true,
+"XITERZ-I2QX-8VND":true,
+"XITERZ-O7MC-3RKA":true,
+"XITERZ-P5ZT-9LWF":true,
+"XITERZ-B4XN-6QDR":true,
+"XITERZ-K8RV-1MPC":true,
+"XITERZ-X3QA-7ZNT":true,
+"XITERZ-R6LF-2KVM":true,
+"XITERZ-M5WD-8QXR":true,
+"XITERZ-T9KC-4NPA":true
+
+};
+
+
+/* =========================================
+   24 JAM
+========================================= */
+
+const DURATION =
+    24 * 60 * 60 * 1000;
+
+
+/* =========================================
+   LOGIN
+========================================= */
+
+function login(){
+
+    const input =
+        document
+        .getElementById("keyInput")
+        .value
+        .trim()
+        .toUpperCase();
+
+    const result =
+        document
+        .getElementById("result");
+
+
+    if(!input){
+
+        result.className =
+            "result error";
+
+        result.innerText =
+            "✕ MASUKKAN KEY";
+
+        return;
+    }
+
+
+    if(!keys[input]){
+
+        result.className =
+            "result error";
+
+        result.innerText =
+            "✕ XITERZ KEY INVALID";
+
+        return;
+    }
+
+
+    const storageName =
+        "xiterz_key_" + input;
+
+
+    let start =
+        localStorage.getItem(storageName);
+
+
+    if(!start){
+
+        start = Date.now();
+
+        localStorage.setItem(
+            storageName,
+            start
+        );
+    }
+
+
+    const elapsed =
+        Date.now() - Number(start);
+
+
+    if(elapsed >= DURATION){
+
+        result.className =
+            "result error";
+
+        result.innerText =
+            "✕ KEY EXPIRED";
+
+        return;
+    }
+
+
+    localStorage.setItem(
+        "xiterz_current_key",
+        input
+    );
+
+
+    result.className =
+        "result success";
+
+    result.innerText =
+        "✓ ACCESS GRANTED";
+
+
+    setTimeout(function(){
+
+        document
+        .getElementById("loginPage")
+        .classList
+        .add("hidden");
+
+        document
+        .getElementById("contentPage")
+        .classList
+        .remove("hidden");
+
+        updateTimer();
+
+    },400);
+}
+
+
+/* =========================================
+   TIMER
+========================================= */
+
+function updateTimer(){
+
+    const currentKey =
+        localStorage.getItem(
+            "xiterz_current_key"
+        );
+
+    const timer =
+        document
+        .getElementById("timer");
+
+
+    if(!currentKey){
+
+        timer.innerText =
+            "🟢 KEY ACTIVE";
+
+        return;
+    }
+
+
+    const start =
+        Number(
+            localStorage.getItem(
+                "xiterz_key_" + currentKey
+            )
+        );
+
+
+    const left =
+        DURATION -
+        (Date.now() - start);
+
+
+    if(left <= 0){
+
+        timer.innerText =
+            "🔴 KEY EXPIRED";
+
+        logout();
+
+        return;
+    }
+
+
+    const hours =
+        Math.floor(
+            left / 3600000
+        );
+
+
+    const minutes =
+        Math.floor(
+            (left % 3600000) / 60000
+        );
+
+
+    const seconds =
+        Math.floor(
+            (left % 60000) / 1000
+        );
+
+
+    timer.innerText =
+        "🟢 KEY ACTIVE • " +
+        hours + "h " +
+        minutes + "m " +
+        seconds + "s";
+}
+
+
+/* =========================================
+   COPY CODE
+========================================= */
+
+function copyCode(){
+
+    const code =
+        document
+        .getElementById("trialCode")
+        .innerText
+        .trim();
+
+    const result =
+        document
+        .getElementById("copyResult");
+
+
+    /*
+       Coba Clipboard API dulu.
+    */
+
+    if(
+        navigator.clipboard &&
+        window.isSecureContext
+    ){
+
+        navigator.clipboard
+        .writeText(code)
+        .then(function(){
+
+            showCopied();
+
+        })
+        .catch(function(){
+
+            fallbackCopy(code);
+
+        });
+
+        return;
+    }
+
+
+    /*
+       Fallback untuk file lokal.
+    */
+
+    fallbackCopy(code);
+}
+
+
+function fallbackCopy(text){
+
+    const textarea =
+        document.createElement("textarea");
+
+
+    textarea.value = text;
+
+    textarea.style.position =
+        "fixed";
+
+    textarea.style.left =
+        "-9999px";
+
+    textarea.style.top =
+        "0";
+
+    textarea.style.opacity =
+        "0";
+
+
+    document.body.appendChild(
+        textarea
+    );
+
+
+    textarea.focus();
+
+    textarea.select();
+
+    textarea.setSelectionRange(
+        0,
+        textarea.value.length
+    );
+
+
+    let berhasil = false;
+
+
+    try{
+
+        berhasil =
+            document.execCommand(
+                "copy"
+            );
+
+    }catch(e){
+
+        berhasil = false;
+
+    }
+
+
+    document.body.removeChild(
+        textarea
+    );
+
+
+    if(berhasil){
+
+        showCopied();
+
+    }else{
+
+        /*
+           Kalau browser benar-benar
+           memblokir clipboard,
+           tampilkan prompt bawaan.
+        */
+
+        const manual =
+            window.prompt(
+                "Salin kode trial berikut:",
+                text
+            );
+
+
+        if(manual !== null){
+
+            const result =
+                document
+                .getElementById(
+                    "copyResult"
+                );
+
+            result.className =
+                "result success";
+
+            result.innerText =
+                "✓ SILAKAN SALIN KODE DI ATAS";
+
+        }
+
+    }
+}
+
+
+function showCopied(){
+
+    const result =
+        document
+        .getElementById(
+            "copyResult"
+        );
+
+
+    result.className =
+        "result success";
+
+    result.innerText =
+        "✓ CODE BERHASIL DISALIN";
+
+}
+
+
+/* =========================================
+   LOGOUT
+========================================= */
+
+function logout(){
+
+    document
+    .getElementById("contentPage")
+    .classList
+    .add("hidden");
+
+
+    document
+    .getElementById("loginPage")
+    .classList
+    .remove("hidden");
+
+
+    document
+    .getElementById("keyInput")
+    .value = "";
+
+
+    document
+    .getElementById("result")
+    .innerText = "";
+
+
+    localStorage.removeItem(
+        "xiterz_current_key"
+    );
+}
+
+
+/* =========================================
+   UPDATE TIMER
+========================================= */
+
+setInterval(
+    updateTimer,
+    1000
+);
+
+</script>
+
+</body>
+</html>
