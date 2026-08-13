@@ -7,379 +7,507 @@
 <title>XITERZ 969</title>
 
 <style>
-*{
-    box-sizing:border-box;
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
 }
 
-html,body{
-    margin:0;
-    min-height:100%;
+:root {
+    --bg: #050208;
+    --bg2: #0d0614;
+    --card: rgba(14, 7, 22, .88);
+    --text: #ffffff;
+    --muted: #a99bb2;
+    --primary: #b026ff;
+    --secondary: #6a00ff;
+    --border: rgba(190, 60, 255, .5);
+    --shadow: rgba(151, 0, 255, .45);
 }
 
-body{
-    min-height:100vh;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    padding:20px;
-    font-family:Arial,sans-serif;
-    color:white;
+body.light {
+    --bg: #eee7ff;
+    --bg2: #dcd0ff;
+    --card: rgba(255, 255, 255, .86);
+    --text: #1b1025;
+    --muted: #665b70;
+    --primary: #7b16d9;
+    --secondary: #4c00c9;
+    --border: rgba(110, 20, 190, .4);
+    --shadow: rgba(100, 0, 200, .25);
+}
 
+body {
+    min-height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    color: var(--text);
     background:
-        radial-gradient(
-            circle at 50% 5%,
-            #7012b0 0%,
-            transparent 38%
-        ),
-        radial-gradient(
-            circle at 0% 100%,
-            #31005b 0%,
-            transparent 42%
-        ),
-        #07030c;
+        radial-gradient(circle at 50% 0%, rgba(170, 0, 255, .35), transparent 35%),
+        radial-gradient(circle at 0% 100%, rgba(75, 0, 255, .28), transparent 35%),
+        var(--bg);
+
+    display: flex;
+    justify-content: center;
+    padding: 25px 12px;
+
+    transition:
+        background .4s,
+        color .4s;
 }
 
-body::before{
-    content:"";
-    position:fixed;
-    inset:0;
+/* GRID BACKGROUND */
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
 
     background-image:
-        linear-gradient(
-            #9b30ff 1px,
-            transparent 1px
-        ),
-        linear-gradient(
-            90deg,
-            #9b30ff 1px,
-            transparent 1px
-        );
+        linear-gradient(rgba(160, 30, 255, .09) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(160, 30, 255, .09) 1px, transparent 1px);
 
-    background-size:52px 52px;
-    opacity:.08;
-    pointer-events:none;
+    background-size: 45px 45px;
+
+    pointer-events: none;
 }
 
-.box{
-    position:relative;
+/* MAIN */
 
-    width:92%;
-    max-width:520px;
-
-    padding:40px 30px;
-
-    background:rgba(8,4,15,.97);
-
-    border:1px solid #a020f0;
-    border-radius:24px;
-
-    text-align:center;
-
-    box-shadow:
-        0 0 20px #7b1fd4,
-        0 0 55px rgba(160,32,240,.42);
-
-    z-index:1;
+.container {
+    width: 100%;
+    max-width: 620px;
+    position: relative;
+    z-index: 2;
 }
 
-.logo{
-    font-size:60px;
+/* TOP BAR */
 
-    color:#d99aff;
+.topbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    margin-bottom: 18px;
+}
+
+.brand {
+    font-size: 14px;
+    font-weight: bold;
+    letter-spacing: 4px;
+
+    color: var(--primary);
 
     text-shadow:
-        0 0 12px #b84cff,
-        0 0 30px #8a2be2,
-        0 0 60px #8a2be2;
+        0 0 8px var(--primary),
+        0 0 20px var(--shadow);
 }
 
-h1,h2{
-    margin:8px 0;
+.mode-btn {
+    border: 1px solid var(--border);
+    background: var(--card);
+    color: var(--text);
 
-    color:#d99aff;
+    padding: 10px 14px;
 
-    font-size:30px;
+    border-radius: 12px;
 
-    letter-spacing:5px;
-
-    text-shadow:
-        0 0 12px rgba(190,80,255,.6);
-}
-
-.subtitle{
-    color:#96859f;
-
-    font-size:12px;
-
-    letter-spacing:3px;
-
-    margin:10px 0 30px;
-}
-
-input{
-    width:100%;
-
-    padding:17px;
-
-    background:#100818;
-
-    color:white;
-
-    border:1px solid #4b176c;
-
-    border-radius:11px;
-
-    outline:none;
-
-    font-size:16px;
-
-    text-align:center;
-}
-
-input:focus{
-    border-color:#c45cff;
+    cursor: pointer;
 
     box-shadow:
-        0 0 12px rgba(196,92,255,.45);
+        0 0 15px var(--shadow);
+
+    transition: .25s;
 }
 
-button,
-.download{
-    width:100%;
-
-    padding:16px;
-
-    margin-top:15px;
-
-    display:block;
-
-    border:none;
-
-    border-radius:10px;
-
-    color:white;
-
-    background:
-        linear-gradient(
-            90deg,
-            #6813a5,
-            #a020f0,
-            #6813a5
-        );
-
-    font-size:14px;
-
-    font-weight:bold;
-
-    letter-spacing:2px;
-
-    text-decoration:none;
-
-    cursor:pointer;
-
-    box-shadow:
-        0 0 16px rgba(160,32,240,.45);
-
-    transition:.2s;
+.mode-btn:hover {
+    transform: translateY(-2px);
 }
 
-button:hover,
-.download:hover{
-    transform:scale(1.02);
+/* HERO */
 
-    box-shadow:
-        0 0 25px rgba(160,32,240,.7);
-}
+.hero {
+    text-align: center;
 
-button:active{
-    transform:scale(.98);
-}
+    padding: 40px 25px 30px;
 
-.result{
-    min-height:22px;
-
-    margin-top:17px;
-
-    font-size:13px;
-
-    font-weight:bold;
-}
-
-.error{
-    color:#ff6b9d;
-}
-
-.success{
-    color:#65ff9a;
-}
-
-.info{
-    margin-top:22px;
-
-    color:#8e7c97;
-
-    font-size:11px;
-
-    line-height:1.7;
-}
-
-.card{
-    text-align:left;
-
-    margin:18px 0;
-
-    padding:22px;
+    border: 1px solid var(--border);
+    border-radius: 28px;
 
     background:
         linear-gradient(
             145deg,
-            rgba(25,10,35,.97),
-            rgba(12,5,18,.97)
+            rgba(35, 8, 50, .94),
+            var(--card)
         );
 
-    border:1px solid #42135c;
+    box-shadow:
+        0 0 20px var(--shadow),
+        inset 0 0 40px rgba(170, 0, 255, .06);
 
-    border-radius:15px;
+    overflow: hidden;
+
+    position: relative;
+}
+
+body.light .hero {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.95),
+            rgba(237,224,255,.9)
+        );
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+
+    width: 220px;
+    height: 220px;
+
+    left: 50%;
+    top: -150px;
+
+    transform: translateX(-50%);
+
+    background: #b000ff;
+
+    filter: blur(90px);
+
+    opacity: .35;
+}
+
+.logo {
+    position: relative;
+
+    font-size: 62px;
+
+    margin-bottom: 10px;
+
+    color: #d879ff;
+
+    text-shadow:
+        0 0 10px #c000ff,
+        0 0 30px #9900ff,
+        0 0 70px #7100ff;
+
+    animation: pulse 2.5s infinite alternate;
+}
+
+@keyframes pulse {
+    from {
+        transform: scale(1);
+        filter: brightness(1);
+    }
+
+    to {
+        transform: scale(1.06);
+        filter: brightness(1.3);
+    }
+}
+
+h1 {
+    position: relative;
+
+    font-size: 32px;
+
+    letter-spacing: 6px;
+
+    color: var(--text);
+
+    text-shadow:
+        0 0 12px var(--primary),
+        0 0 30px var(--shadow);
+}
+
+.subtitle {
+    position: relative;
+
+    margin-top: 12px;
+
+    color: var(--muted);
+
+    font-size: 12px;
+
+    letter-spacing: 4px;
+}
+
+/* STATUS */
+
+.status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 22px;
+
+    padding: 10px 16px;
+
+    border-radius: 30px;
+
+    background: rgba(0, 255, 120, .07);
+
+    border: 1px solid rgba(0, 255, 120, .25);
+
+    color: #55ff9a;
+
+    font-size: 13px;
+    font-weight: bold;
 
     box-shadow:
-        inset 0 0 20px
-        rgba(160,32,240,.04);
+        0 0 15px rgba(0, 255, 120, .1);
 }
 
-.card-title{
-    color:#d99aff;
+.dot {
+    width: 9px;
+    height: 9px;
 
-    font-size:20px;
+    background: #32ff7e;
 
-    font-weight:bold;
+    border-radius: 50%;
 
-    margin-bottom:10px;
+    box-shadow:
+        0 0 10px #32ff7e;
 }
 
-.card-info{
-    color:#aaa;
+/* FILE CARD */
 
-    font-size:13px;
+.file-card {
+    margin-top: 20px;
 
-    line-height:1.6;
-
-    margin-bottom:14px;
-}
-
-.note{
-    margin-top:13px;
-
-    padding:12px;
+    padding: 25px;
 
     background:
-        rgba(160,32,240,.08);
+        linear-gradient(
+            145deg,
+            rgba(30, 9, 43, .94),
+            rgba(9, 4, 15, .94)
+        );
 
-    border-left:3px solid #a020f0;
+    border: 1px solid var(--border);
 
-    border-radius:6px;
+    border-radius: 20px;
 
-    color:#c7b2cc;
+    text-align: left;
 
-    font-size:11px;
+    position: relative;
 
-    line-height:1.6;
+    overflow: hidden;
+
+    transition: .3s;
+
+    box-shadow:
+        0 0 18px rgba(130, 0, 220, .12);
 }
 
-.code-box{
-    padding:17px;
+body.light .file-card {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255,255,255,.94),
+            rgba(241,232,255,.95)
+        );
+}
 
-    text-align:center;
+.file-card:hover {
+    transform: translateY(-4px);
+
+    border-color: var(--primary);
+
+    box-shadow:
+        0 0 25px var(--shadow);
+}
+
+.file-card::after {
+    content: "";
+
+    position: absolute;
+
+    width: 100px;
+    height: 100px;
+
+    right: -50px;
+    top: -50px;
+
+    background: var(--primary);
+
+    filter: blur(50px);
+
+    opacity: .25;
+}
+
+/* TITLE */
+
+.file-title {
+    position: relative;
+    z-index: 1;
+
+    color: var(--primary);
+
+    font-size: 21px;
+
+    font-weight: bold;
+
+    text-shadow:
+        0 0 10px var(--shadow);
+}
+
+.file-desc {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 8px;
+
+    color: var(--muted);
+
+    font-size: 13px;
+}
+
+/* KEY */
+
+.key-box {
+    position: relative;
+    z-index: 1;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    background: rgba(0, 0, 0, .25);
+
+    border: 1px solid rgba(190, 60, 255, .25);
+
+    text-align: center;
+}
+
+.key-label {
+    color: var(--muted);
+
+    font-size: 10px;
+
+    letter-spacing: 3px;
+
+    margin-bottom: 8px;
+}
+
+.key {
+    color: #d789ff;
+
+    font-size: 22px;
+
+    font-weight: bold;
+
+    letter-spacing: 3px;
+
+    text-shadow:
+        0 0 12px #a600ff;
+}
+
+/* BUTTON */
+
+.download {
+    position: relative;
+    z-index: 1;
+
+    display: block;
+
+    width: 100%;
+
+    margin-top: 18px;
+
+    padding: 16px;
+
+    border-radius: 12px;
+
+    text-align: center;
+
+    text-decoration: none;
+
+    color: white;
+
+    font-size: 14px;
+
+    font-weight: bold;
+
+    letter-spacing: 2px;
 
     background:
-        rgba(0,0,0,.4);
+        linear-gradient(
+            90deg,
+            #6500c9,
+            #b000ff,
+            #6500c9
+        );
 
-    border:1px solid #4b176c;
+    background-size: 200% 100%;
 
-    border-radius:9px;
+    box-shadow:
+        0 0 18px rgba(160, 0, 255, .45);
 
-    margin-top:12px;
+    transition: .3s;
 }
 
-.code-label{
-    color:#8e7c97;
+.download:hover {
+    background-position: 100% 0;
 
-    font-size:10px;
+    transform: translateY(-2px);
 
-    letter-spacing:2px;
-
-    margin-bottom:8px;
+    box-shadow:
+        0 0 30px rgba(190, 0, 255, .7);
 }
 
-.code{
-    color:#e4b8ff;
+.download:active {
+    transform: scale(.98);
+}
 
-    font-size:22px;
+/* FOOTER */
 
-    font-weight:bold;
+.footer {
+    text-align: center;
 
-    letter-spacing:3px;
+    margin-top: 25px;
+    padding-top: 20px;
+
+    border-top: 1px solid var(--border);
+
+    color: var(--primary);
+
+    font-size: 12px;
+
+    font-weight: bold;
+
+    letter-spacing: 4px;
 
     text-shadow:
-        0 0 10px #8a2be2;
-
-    user-select:text;
-
-    -webkit-user-select:text;
+        0 0 10px var(--shadow);
 }
 
-.timer{
-    margin:10px 0 20px;
+/* RESPONSIVE */
 
-    color:#c77dff;
+@media(max-width: 450px) {
 
-    font-size:13px;
-
-    font-weight:bold;
-}
-
-.credit{
-    margin-top:25px;
-
-    padding-top:18px;
-
-    border-top:1px solid #321142;
-
-    color:#a875c5;
-
-    font-size:12px;
-
-    font-weight:bold;
-
-    letter-spacing:3px;
-
-    text-shadow:
-        0 0 10px #8a2be2;
-}
-
-.hidden{
-    display:none;
-}
-
-@media(max-width:430px){
-
-    .box{
-        width:96%;
-
-        padding:34px 23px;
+    body {
+        padding: 15px 10px;
     }
 
-    .logo{
-        font-size:52px;
+    .hero {
+        padding: 32px 18px 25px;
     }
 
-    h1,h2{
-        font-size:26px;
-
-        letter-spacing:4px;
+    .logo {
+        font-size: 52px;
     }
 
-    .code{
-        font-size:19px;
+    h1 {
+        font-size: 25px;
+        letter-spacing: 4px;
+    }
+
+    .file-card {
+        padding: 20px;
     }
 }
 </style>
@@ -387,694 +515,158 @@ button:active{
 
 <body>
 
+<div class="container">
 
-<!-- =========================
-     LOGIN PAGE
-========================= -->
+    <div class="topbar">
 
-<div class="box" id="loginPage">
-
-    <div class="logo">
-        ◈
-    </div>
-
-    <h1>
-        XITERZ 969
-    </h1>
-
-    <div class="subtitle">
-        PRIVATE ACCESS
-    </div>
-
-    <input
-        id="keyInput"
-        type="text"
-        placeholder="MASUKKAN XITERZ KEY"
-        autocomplete="off"
-    >
-
-    <button onclick="login()">
-        🔐 ACCESS
-    </button>
-
-    <div
-        id="result"
-        class="result"
-    ></div>
-
-    <div class="info">
-        🔑 KEY ACCESS DIPERLUKAN<br>
-        ⏱️ AKSES BERLAKU 24 JAM
-    </div>
-
-    <div class="credit">
-        CREDIT BY XITERZ 969
-    </div>
-
-</div>
-
-
-
-<!-- =========================
-     CONTENT PAGE
-========================= -->
-
-<div
-    class="box hidden"
-    id="contentPage"
->
-
-    <div class="logo">
-        ◈
-    </div>
-
-    <h2>
-        XITERZ 969
-    </h2>
-
-    <div class="subtitle">
-        ACCESS GRANTED
-    </div>
-
-    <div
-        id="timer"
-        class="timer"
-    >
-        🟢 KEY ACTIVE
-    </div>
-
-
-    <!-- VPN -->
-
-    <div class="card">
-
-        <div class="card-title">
-            🟢 VPN NO ADS
+        <div class="brand">
+            XITERZ 969
         </div>
 
-        <div class="card-info">
-            VPN India tanpa iklan.
-        </div>
-
-        <a
-            class="download"
-            href="https://www.mediafire.com/file/xyl3ga3m01tadx0/VPN_India_1.147.apk/file"
-            target="_blank"
-            rel="noopener noreferrer"
+        <button
+            class="mode-btn"
+            onclick="toggleMode()"
+            id="modeButton"
         >
-            DOWNLOAD VPN
-        </a>
-
-        <div class="note">
-
-            ⚠️ <b>NOTE:</b><br>
-
-            Ganti server VPN setiap kali
-            mau claim trial code.
-
-        </div>
-
-    </div>
-
-
-    <!-- TRIAL CODE -->
-
-    <div class="card">
-
-        <div class="card-title">
-            🔴 CODE FREE TRIAL 4 JAM
-        </div>
-
-        <div class="card-info">
-            Gunakan kode berikut untuk free trial.
-        </div>
-
-
-        <div class="code-box">
-
-            <div class="code-label">
-                TRIAL CODE
-            </div>
-
-            <div
-                class="code"
-                id="trialCode"
-            >
-                1CNA6RRNK
-            </div>
-
-        </div>
-
-
-        <button onclick="copyCode()">
-            📋 COPY CODE
+            ☀️ LIGHT
         </button>
 
-
-        <div
-            id="copyResult"
-            class="result"
-        ></div>
-
     </div>
 
 
-    <button onclick="logout()">
-        🚪 LOGOUT
-    </button>
+    <div class="hero">
+
+        <div class="logo">
+            ◈
+        </div>
+
+        <h1>
+            XITERZ 969
+        </h1>
+
+        <div class="subtitle">
+            GAMING FILE CENTER
+        </div>
+
+        <div class="status">
+            <span class="dot"></span>
+            SYSTEM ONLINE
+        </div>
 
 
-    <div class="credit">
-        CREDIT BY XITERZ 969
+        <!-- ZYTRON -->
+
+        <div class="file-card">
+
+            <div class="file-title">
+                ⚡ ZYTRON INTERNEL ⚡
+            </div>
+
+            <div class="file-desc">
+                ZYTRON PRO INTERNAL
+            </div>
+
+            <div class="key-box">
+
+                <div class="key-label">
+                    🔑 ACCESS KEY
+                </div>
+
+                <div class="key">
+                    ZyTrial
+                </div>
+
+            </div>
+
+            <a
+                class="download"
+                href="https://www.mediafire.com/file/ag0x9gd04caelhe/ZYTRON+PRO+INTERNAL.apk/file"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ⚡ DOWNLOAD ZYTRON
+            </a>
+
+        </div>
+
+
+        <!-- FF MAX -->
+
+        <div class="file-card">
+
+            <div class="file-title">
+                ✅ USE THIS FF MAX
+            </div>
+
+            <div class="file-desc">
+                Free Fire MAX 2.130.1
+            </div>
+
+            <a
+                class="download"
+                href="https://www.mediafire.com/file/8k3oqgknrx709f3/Free+Fire+MAX_2.130.1.apks/file"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                🎮 DOWNLOAD FF MAX
+            </a>
+
+        </div>
+
+
+        <div class="footer">
+            CREDIT BY XITERZ 969
+        </div>
+
     </div>
 
 </div>
-
 
 
 <script>
 
+function toggleMode() {
 
-/* =========================================
-   100 KEY
-========================================= */
+    document.body.classList.toggle("light");
 
-const keys = {
+    const button =
+        document.getElementById("modeButton");
 
-"XITERZ-A7K9-X2PM":true,
-"XITERZ-Q4ZT-8NLR":true,
-"XITERZ-M8CX-3VPA":true,
-"XITERZ-K2FD-9QWX":true,
-"XITERZ-R7HN-4BZY":true,
-"XITERZ-P5LM-8KTC":true,
-"XITERZ-X9QA-2DVR":true,
-"XITERZ-B3NW-7HFK":true,
-"XITERZ-Z6RP-4MJC":true,
-"XITERZ-T8VX-1QAL":true,
+    if (document.body.classList.contains("light")) {
 
-"XITERZ-C4KP-9ZND":true,
-"XITERZ-H7XM-2RVB":true,
-"XITERZ-N5QF-8LTC":true,
-"XITERZ-W2JA-6PKR":true,
-"XITERZ-Y9MD-3XQH":true,
-"XITERZ-F8RL-5VNC":true,
-"XITERZ-D6TZ-1KPW":true,
-"XITERZ-J3XB-7QMA":true,
-"XITERZ-L9CH-4RVT":true,
-"XITERZ-V5NK-8ZPD":true,
-
-"XITERZ-A2QW-6MFR":true,
-"XITERZ-G7KP-9XTC":true,
-"XITERZ-S4ZN-2HVL":true,
-"XITERZ-E8RM-5QBX":true,
-"XITERZ-U3FD-7KNP":true,
-"XITERZ-I6VA-1ZQW":true,
-"XITERZ-O9XC-4LMT":true,
-"XITERZ-P2RH-8DJK":true,
-"XITERZ-B7QM-3VXF":true,
-"XITERZ-K5TZ-6NRA":true,
-
-"XITERZ-X4LP-9QMC":true,
-"XITERZ-R8NW-2FVK":true,
-"XITERZ-M3JD-7ZQA":true,
-"XITERZ-T6HC-1PXR":true,
-"XITERZ-Q9VB-5KLF":true,
-"XITERZ-N2ZA-8WMT":true,
-"XITERZ-F7RX-4QPD":true,
-"XITERZ-C5KM-6HNV":true,
-"XITERZ-J8QT-3LWA":true,
-"XITERZ-D4PF-9XRB":true,
-
-"XITERZ-V6NK-2QTM":true,
-"XITERZ-Y3HC-7ZLP":true,
-"XITERZ-A9RW-5KXD":true,
-"XITERZ-G2VF-8MNC":true,
-"XITERZ-S7QA-1RZT":true,
-"XITERZ-E4LX-6PKM":true,
-"XITERZ-U8ND-3QWR":true,
-"XITERZ-I5ZT-9HVC":true,
-"XITERZ-O2KM-7XFD":true,
-"XITERZ-P6RB-4NQA":true,
-
-"XITERZ-B9WC-2LMT":true,
-"XITERZ-K3QX-8VNR":true,
-"XITERZ-X7FD-5JPA":true,
-"XITERZ-R2ZM-9QKC":true,
-"XITERZ-M6HV-1TXB":true,
-"XITERZ-T4NK-7WQP":true,
-"XITERZ-Q8LC-3ZMR":true,
-"XITERZ-N5XA-6FKD":true,
-"XITERZ-F2PV-9RWT":true,
-"XITERZ-C7QM-4HNX":true,
-
-"XITERZ-J9ZA-2KRF":true,
-"XITERZ-D3LX-8VPC":true,
-"XITERZ-V7NW-5QMA":true,
-"XITERZ-Y4KT-1ZRX":true,
-"XITERZ-A8HC-6PLN":true,
-"XITERZ-G5RD-3QVK":true,
-"XITERZ-S2XM-9NTA":true,
-"XITERZ-E7QF-4KLP":true,
-"XITERZ-U3ZR-8WNC":true,
-"XITERZ-I9MK-2XFD":true,
-
-"XITERZ-O6VP-5RQA":true,
-"XITERZ-P4LN-7ZKC":true,
-"XITERZ-B8XW-3MTR":true,
-"XITERZ-K2QD-9FVN":true,
-"XITERZ-X5JA-6RLP":true,
-"XITERZ-R7MC-1QZT":true,
-"XITERZ-M9VK-4HXD":true,
-"XITERZ-T3NF-8PQA":true,
-"XITERZ-Q6ZR-2KWC":true,
-"XITERZ-N4LP-7XMT":true,
-
-"XITERZ-F8QA-5RND":true,
-"XITERZ-C2VK-9ZLP":true,
-"XITERZ-J6XM-3QTR":true,
-"XITERZ-D9NW-1KFC":true,
-"XITERZ-V5RQ-8MZA":true,
-"XITERZ-Y2HT-4PLK":true,
-"XITERZ-A7XC-6QVN":true,
-"XITERZ-G3LM-9RZT":true,
-"XITERZ-S8KP-2XFD":true,
-"XITERZ-E5NW-7QMC":true,
-
-"XITERZ-U9ZR-4KPL":true,
-"XITERZ-I2QX-8VND":true,
-"XITERZ-O7MC-3RKA":true,
-"XITERZ-P5ZT-9LWF":true,
-"XITERZ-B4XN-6QDR":true,
-"XITERZ-K8RV-1MPC":true,
-"XITERZ-X3QA-7ZNT":true,
-"XITERZ-R6LF-2KVM":true,
-"XITERZ-M5WD-8QXR":true,
-"XITERZ-T9KC-4NPA":true
-
-};
-
-
-/* =========================================
-   24 JAM
-========================================= */
-
-const DURATION =
-    24 * 60 * 60 * 1000;
-
-
-/* =========================================
-   LOGIN
-========================================= */
-
-function login(){
-
-    const input =
-        document
-        .getElementById("keyInput")
-        .value
-        .trim()
-        .toUpperCase();
-
-    const result =
-        document
-        .getElementById("result");
-
-
-    if(!input){
-
-        result.className =
-            "result error";
-
-        result.innerText =
-            "✕ MASUKKAN KEY";
-
-        return;
-    }
-
-
-    if(!keys[input]){
-
-        result.className =
-            "result error";
-
-        result.innerText =
-            "✕ XITERZ KEY INVALID";
-
-        return;
-    }
-
-
-    const storageName =
-        "xiterz_key_" + input;
-
-
-    let start =
-        localStorage.getItem(storageName);
-
-
-    if(!start){
-
-        start = Date.now();
+        button.innerHTML = "🌙 DARK";
 
         localStorage.setItem(
-            storageName,
-            start
-        );
-    }
-
-
-    const elapsed =
-        Date.now() - Number(start);
-
-
-    if(elapsed >= DURATION){
-
-        result.className =
-            "result error";
-
-        result.innerText =
-            "✕ KEY EXPIRED";
-
-        return;
-    }
-
-
-    localStorage.setItem(
-        "xiterz_current_key",
-        input
-    );
-
-
-    result.className =
-        "result success";
-
-    result.innerText =
-        "✓ ACCESS GRANTED";
-
-
-    setTimeout(function(){
-
-        document
-        .getElementById("loginPage")
-        .classList
-        .add("hidden");
-
-        document
-        .getElementById("contentPage")
-        .classList
-        .remove("hidden");
-
-        updateTimer();
-
-    },400);
-}
-
-
-/* =========================================
-   TIMER
-========================================= */
-
-function updateTimer(){
-
-    const currentKey =
-        localStorage.getItem(
-            "xiterz_current_key"
+            "xiterz_mode",
+            "light"
         );
 
-    const timer =
-        document
-        .getElementById("timer");
+    } else {
 
+        button.innerHTML = "☀️ LIGHT";
 
-    if(!currentKey){
-
-        timer.innerText =
-            "🟢 KEY ACTIVE";
-
-        return;
-    }
-
-
-    const start =
-        Number(
-            localStorage.getItem(
-                "xiterz_key_" + currentKey
-            )
+        localStorage.setItem(
+            "xiterz_mode",
+            "dark"
         );
-
-
-    const left =
-        DURATION -
-        (Date.now() - start);
-
-
-    if(left <= 0){
-
-        timer.innerText =
-            "🔴 KEY EXPIRED";
-
-        logout();
-
-        return;
-    }
-
-
-    const hours =
-        Math.floor(
-            left / 3600000
-        );
-
-
-    const minutes =
-        Math.floor(
-            (left % 3600000) / 60000
-        );
-
-
-    const seconds =
-        Math.floor(
-            (left % 60000) / 1000
-        );
-
-
-    timer.innerText =
-        "🟢 KEY ACTIVE • " +
-        hours + "h " +
-        minutes + "m " +
-        seconds + "s";
-}
-
-
-/* =========================================
-   COPY CODE
-========================================= */
-
-function copyCode(){
-
-    const code =
-        document
-        .getElementById("trialCode")
-        .innerText
-        .trim();
-
-    const result =
-        document
-        .getElementById("copyResult");
-
-
-    /*
-       Coba Clipboard API dulu.
-    */
-
-    if(
-        navigator.clipboard &&
-        window.isSecureContext
-    ){
-
-        navigator.clipboard
-        .writeText(code)
-        .then(function(){
-
-            showCopied();
-
-        })
-        .catch(function(){
-
-            fallbackCopy(code);
-
-        });
-
-        return;
-    }
-
-
-    /*
-       Fallback untuk file lokal.
-    */
-
-    fallbackCopy(code);
-}
-
-
-function fallbackCopy(text){
-
-    const textarea =
-        document.createElement("textarea");
-
-
-    textarea.value = text;
-
-    textarea.style.position =
-        "fixed";
-
-    textarea.style.left =
-        "-9999px";
-
-    textarea.style.top =
-        "0";
-
-    textarea.style.opacity =
-        "0";
-
-
-    document.body.appendChild(
-        textarea
-    );
-
-
-    textarea.focus();
-
-    textarea.select();
-
-    textarea.setSelectionRange(
-        0,
-        textarea.value.length
-    );
-
-
-    let berhasil = false;
-
-
-    try{
-
-        berhasil =
-            document.execCommand(
-                "copy"
-            );
-
-    }catch(e){
-
-        berhasil = false;
-
-    }
-
-
-    document.body.removeChild(
-        textarea
-    );
-
-
-    if(berhasil){
-
-        showCopied();
-
-    }else{
-
-        /*
-           Kalau browser benar-benar
-           memblokir clipboard,
-           tampilkan prompt bawaan.
-        */
-
-        const manual =
-            window.prompt(
-                "Salin kode trial berikut:",
-                text
-            );
-
-
-        if(manual !== null){
-
-            const result =
-                document
-                .getElementById(
-                    "copyResult"
-                );
-
-            result.className =
-                "result success";
-
-            result.innerText =
-                "✓ SILAKAN SALIN KODE DI ATAS";
-
-        }
-
     }
 }
 
 
-function showCopied(){
+/* Simpan mode yang terakhir dipakai */
 
-    const result =
-        document
-        .getElementById(
-            "copyResult"
-        );
+const savedMode =
+    localStorage.getItem("xiterz_mode");
 
+if (savedMode === "light") {
 
-    result.className =
-        "result success";
+    document.body.classList.add("light");
 
-    result.innerText =
-        "✓ CODE BERHASIL DISALIN";
-
+    document.getElementById("modeButton").innerHTML =
+        "🌙 DARK";
 }
-
-
-/* =========================================
-   LOGOUT
-========================================= */
-
-function logout(){
-
-    document
-    .getElementById("contentPage")
-    .classList
-    .add("hidden");
-
-
-    document
-    .getElementById("loginPage")
-    .classList
-    .remove("hidden");
-
-
-    document
-    .getElementById("keyInput")
-    .value = "";
-
-
-    document
-    .getElementById("result")
-    .innerText = "";
-
-
-    localStorage.removeItem(
-        "xiterz_current_key"
-    );
-}
-
-
-/* =========================================
-   UPDATE TIMER
-========================================= */
-
-setInterval(
-    updateTimer,
-    1000
-);
 
 </script>
 
 </body>
-</html>
+    </html>
