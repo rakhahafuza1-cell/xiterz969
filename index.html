@@ -3,670 +3,334 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>XITERZ 969</title>
-
+<title>XITERZ 969 • Gaming Center</title>
+<meta name="theme-color" content="#090014">
 <style>
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+:root{
+  --bg:#07000f; --panel:rgba(18,3,31,.82); --panel2:rgba(34,5,54,.72);
+  --text:#fff; --muted:#b9a6c8; --accent:#b000ff; --accent2:#6a00ff;
+  --good:#00ff88; --danger:#ff3864; --line:rgba(190,60,255,.35);
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;font-family:Arial,Helvetica,sans-serif;color:var(--text)}
+body{
+  background:
+    radial-gradient(circle at 50% -10%,rgba(160,0,255,.34),transparent 34%),
+    radial-gradient(circle at 0 70%,rgba(70,0,255,.18),transparent 32%),
+    var(--bg);
+  overflow-x:hidden;
+}
+body.light{
+  --bg:#eef2ff; --panel:rgba(255,255,255,.84); --panel2:rgba(255,255,255,.72);
+  --text:#171126; --muted:#665c79; --line:rgba(111,0,255,.25);
+  background:
+    radial-gradient(circle at 50% -10%,rgba(168,92,255,.35),transparent 36%),
+    linear-gradient(135deg,#f8f5ff,#e9e5ff);
+}
+body:before{
+  content:"";position:fixed;inset:0;pointer-events:none;opacity:.18;
+  background-image:linear-gradient(rgba(180,0,255,.25) 1px,transparent 1px),
+                   linear-gradient(90deg,rgba(180,0,255,.25) 1px,transparent 1px);
+  background-size:42px 42px;
+  mask-image:linear-gradient(to bottom,#000,transparent 85%);
+}
+canvas#particles{position:fixed;inset:0;z-index:-1;pointer-events:none}
+button,input{font:inherit}
+.hidden{display:none!important}
+
+/* KEY SCREEN */
+#gate{
+  min-height:100vh;display:grid;place-items:center;padding:24px;
+}
+.gate-card{
+  width:min(440px,100%);padding:34px 24px;border:1px solid var(--line);
+  border-radius:28px;background:var(--panel);backdrop-filter:blur(18px);
+  box-shadow:0 0 45px rgba(174,0,255,.25),inset 0 0 35px rgba(160,0,255,.06);
+  text-align:center;animation:pop .7s ease both;
+}
+.logo{
+  width:82px;height:82px;margin:0 auto 18px;border-radius:24px;
+  display:grid;place-items:center;font-size:38px;
+  background:linear-gradient(145deg,#23003c,#0b0013);
+  border:1px solid #c53cff;box-shadow:0 0 30px rgba(190,0,255,.7);
+  animation:pulse 2s infinite;
+}
+h1{margin:0;font-size:29px;letter-spacing:7px}
+.sub{margin:9px 0 26px;color:var(--muted);letter-spacing:4px;font-size:12px}
+.input-wrap{position:relative}
+#keyInput{
+  width:100%;padding:17px 16px;border-radius:15px;border:1px solid var(--line);
+  outline:none;background:rgba(0,0,0,.22);color:var(--text);text-align:center;
+  letter-spacing:3px;font-weight:700;box-shadow:inset 0 0 18px rgba(180,0,255,.06);
+}
+#keyInput:focus{border-color:#d64cff;box-shadow:0 0 20px rgba(190,0,255,.2)}
+.btn{
+  width:100%;margin-top:13px;padding:16px;border:0;border-radius:15px;
+  color:#fff;font-weight:900;letter-spacing:2px;cursor:pointer;
+  background:linear-gradient(100deg,#6900ff,#c000ff,#6d00ff);
+  background-size:200% 100%;box-shadow:0 0 24px rgba(171,0,255,.35);
+  animation:gradient 3s linear infinite;transition:.2s;
+}
+.btn:active{transform:scale(.98)}
+#gateMsg{min-height:20px;margin-top:13px;font-size:13px;font-weight:700}
+
+/* APP */
+header{
+  position:sticky;top:0;z-index:10;padding:16px 18px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:rgba(7,0,15,.55);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--line);
+}
+body.light header{background:rgba(255,255,255,.58)}
+.brand{font-weight:1000;letter-spacing:4px}
+.mode{
+  border:1px solid var(--line);background:var(--panel);color:var(--text);
+  padding:10px 13px;border-radius:12px;cursor:pointer;
+}
+.container{width:min(720px,92%);margin:auto;padding:35px 0 45px}
+.hero{text-align:center;padding:25px 0 35px;animation:fadeUp .8s ease both}
+.hero-icon{
+  width:96px;height:96px;margin:auto;border-radius:28px;display:grid;place-items:center;
+  font-size:43px;background:linear-gradient(145deg,#25003f,#08000d);
+  border:1px solid #d24aff;box-shadow:0 0 45px rgba(196,0,255,.65);
+  animation:float 3s ease-in-out infinite;
+}
+body.light .hero-icon{background:linear-gradient(145deg,#fff,#e6dcff)}
+.hero h2{font-size:clamp(32px,8vw,56px);margin:22px 0 8px;letter-spacing:8px}
+.hero p{color:var(--muted);letter-spacing:5px;font-size:12px}
+.status{
+  display:inline-flex;align-items:center;gap:9px;margin-top:10px;padding:10px 16px;
+  border:1px solid rgba(0,255,136,.3);border-radius:99px;color:var(--good);
+  background:rgba(0,255,136,.05);box-shadow:0 0 22px rgba(0,255,136,.08);
+}
+.dot{width:10px;height:10px;background:var(--good);border-radius:50%;box-shadow:0 0 13px var(--good);animation:blink 1.2s infinite}
+
+.card{
+  position:relative;overflow:hidden;margin:18px 0;padding:25px;border-radius:24px;
+  border:1px solid var(--line);background:var(--panel);backdrop-filter:blur(16px);
+  box-shadow:0 0 30px rgba(155,0,255,.12),inset 0 0 30px rgba(155,0,255,.04);
+  animation:fadeUp .7s ease both;
+}
+.card:before{
+  content:"";position:absolute;width:150px;height:150px;right:-80px;top:-80px;
+  background:#c000ff;border-radius:50%;filter:blur(55px);opacity:.18;
+}
+.card:hover{transform:translateY(-3px);box-shadow:0 12px 35px rgba(155,0,255,.22);transition:.25s}
+.card h3{margin:0 0 8px;font-size:23px}
+.card p{color:var(--muted);margin:0 0 18px}
+.keybox{
+  padding:18px;text-align:center;border:1px solid var(--line);border-radius:16px;
+  background:rgba(0,0,0,.18);margin-bottom:14px;
+}
+.keylabel{font-size:11px;letter-spacing:4px;color:var(--muted)}
+.keyvalue{display:block;margin-top:9px;font-size:25px;font-weight:900;letter-spacing:4px;color:#d982ff;text-shadow:0 0 16px rgba(205,0,255,.7)}
+.download{display:block;text-decoration:none;text-align:center}
+.copy{
+  background:transparent;border:1px solid var(--line);color:var(--text);
+  margin-top:10px;animation:none;
+}
+.copy:hover{background:rgba(170,0,255,.1)}
+.note{font-size:12px!important}
+footer{text-align:center;color:#ad68d0;letter-spacing:4px;font-size:11px;padding:18px 0 5px}
+
+/* Toast */
+#toast{
+  position:fixed;left:50%;bottom:25px;transform:translate(-50%,20px);
+  opacity:0;z-index:30;padding:13px 18px;border-radius:14px;
+  background:#170024;color:#fff;border:1px solid #b92eff;
+  box-shadow:0 0 25px rgba(190,0,255,.35);transition:.3s;pointer-events:none;
+}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+
+@keyframes pop{from{opacity:0;transform:scale(.92)}to{opacity:1;transform:scale(1)}}
+@keyframes fadeUp{from{opacity:0;transform:translateY(22px)}to{opacity:1;transform:none}}
+@keyframes pulse{50%{box-shadow:0 0 48px rgba(190,0,255,.9)}}
+@keyframes float{50%{transform:translateY(-9px) rotate(2deg)}}
+@keyframes blink{50%{opacity:.35}}
+@keyframes gradient{0%{background-position:0 50%}100%{background-position:200% 50%}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+
+.music-control{
+  position:fixed;right:16px;top:76px;z-index:20;
+  border:1px solid rgba(210,74,255,.55);
+  border-radius:14px;padding:11px 13px;
+  color:#fff;background:rgba(20,0,32,.78);
+  backdrop-filter:blur(12px);
+  box-shadow:0 0 22px rgba(180,0,255,.28);
+  cursor:pointer;font-size:12px;font-weight:900;letter-spacing:1px;
+  transition:.2s;
+}
+.music-control.on{
+  border-color:#00ff88;
+  box-shadow:0 0 24px rgba(0,255,136,.28);
+  color:#00ff88;
+}
+body.light .music-control{
+  color:#171126;background:rgba(255,255,255,.8);
 }
 
-:root {
-    --bg: #050208;
-    --bg2: #0d0614;
-    --card: rgba(14, 7, 22, .88);
-    --text: #ffffff;
-    --muted: #a99bb2;
-    --primary: #b026ff;
-    --secondary: #6a00ff;
-    --border: rgba(190, 60, 255, .5);
-    --shadow: rgba(151, 0, 255, .45);
-}
-
-body.light {
-    --bg: #eee7ff;
-    --bg2: #dcd0ff;
-    --card: rgba(255, 255, 255, .86);
-    --text: #1b1025;
-    --muted: #665b70;
-    --primary: #7b16d9;
-    --secondary: #4c00c9;
-    --border: rgba(110, 20, 190, .4);
-    --shadow: rgba(100, 0, 200, .25);
-}
-
-body {
-    min-height: 100vh;
-    font-family: Arial, Helvetica, sans-serif;
-    color: var(--text);
-    background:
-        radial-gradient(circle at 50% 0%, rgba(170, 0, 255, .35), transparent 35%),
-        radial-gradient(circle at 0% 100%, rgba(75, 0, 255, .28), transparent 35%),
-        var(--bg);
-
-    display: flex;
-    justify-content: center;
-    padding: 25px 12px;
-
-    transition:
-        background .4s,
-        color .4s;
-}
-
-/* GRID BACKGROUND */
-
-body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-
-    background-image:
-        linear-gradient(rgba(160, 30, 255, .09) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(160, 30, 255, .09) 1px, transparent 1px);
-
-    background-size: 45px 45px;
-
-    pointer-events: none;
-}
-
-/* MAIN */
-
-.container {
-    width: 100%;
-    max-width: 620px;
-    position: relative;
-    z-index: 2;
-}
-
-/* TOP BAR */
-
-.topbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    margin-bottom: 18px;
-}
-
-.brand {
-    font-size: 14px;
-    font-weight: bold;
-    letter-spacing: 4px;
-
-    color: var(--primary);
-
-    text-shadow:
-        0 0 8px var(--primary),
-        0 0 20px var(--shadow);
-}
-
-.mode-btn {
-    border: 1px solid var(--border);
-    background: var(--card);
-    color: var(--text);
-
-    padding: 10px 14px;
-
-    border-radius: 12px;
-
-    cursor: pointer;
-
-    box-shadow:
-        0 0 15px var(--shadow);
-
-    transition: .25s;
-}
-
-.mode-btn:hover {
-    transform: translateY(-2px);
-}
-
-/* HERO */
-
-.hero {
-    text-align: center;
-
-    padding: 40px 25px 30px;
-
-    border: 1px solid var(--border);
-    border-radius: 28px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(35, 8, 50, .94),
-            var(--card)
-        );
-
-    box-shadow:
-        0 0 20px var(--shadow),
-        inset 0 0 40px rgba(170, 0, 255, .06);
-
-    overflow: hidden;
-
-    position: relative;
-}
-
-body.light .hero {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.95),
-            rgba(237,224,255,.9)
-        );
-}
-
-.hero::before {
-    content: "";
-
-    position: absolute;
-
-    width: 220px;
-    height: 220px;
-
-    left: 50%;
-    top: -150px;
-
-    transform: translateX(-50%);
-
-    background: #b000ff;
-
-    filter: blur(90px);
-
-    opacity: .35;
-}
-
-.logo {
-    position: relative;
-
-    font-size: 62px;
-
-    margin-bottom: 10px;
-
-    color: #d879ff;
-
-    text-shadow:
-        0 0 10px #c000ff,
-        0 0 30px #9900ff,
-        0 0 70px #7100ff;
-
-    animation: pulse 2.5s infinite alternate;
-}
-
-@keyframes pulse {
-    from {
-        transform: scale(1);
-        filter: brightness(1);
-    }
-
-    to {
-        transform: scale(1.06);
-        filter: brightness(1.3);
-    }
-}
-
-h1 {
-    position: relative;
-
-    font-size: 32px;
-
-    letter-spacing: 6px;
-
-    color: var(--text);
-
-    text-shadow:
-        0 0 12px var(--primary),
-        0 0 30px var(--shadow);
-}
-
-.subtitle {
-    position: relative;
-
-    margin-top: 12px;
-
-    color: var(--muted);
-
-    font-size: 12px;
-
-    letter-spacing: 4px;
-}
-
-/* STATUS */
-
-.status {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-
-    margin-top: 22px;
-
-    padding: 10px 16px;
-
-    border-radius: 30px;
-
-    background: rgba(0, 255, 120, .07);
-
-    border: 1px solid rgba(0, 255, 120, .25);
-
-    color: #55ff9a;
-
-    font-size: 13px;
-    font-weight: bold;
-
-    box-shadow:
-        0 0 15px rgba(0, 255, 120, .1);
-}
-
-.dot {
-    width: 9px;
-    height: 9px;
-
-    background: #32ff7e;
-
-    border-radius: 50%;
-
-    box-shadow:
-        0 0 10px #32ff7e;
-}
-
-/* FILE CARD */
-
-.file-card {
-    margin-top: 20px;
-
-    padding: 25px;
-
-    background:
-        linear-gradient(
-            145deg,
-            rgba(30, 9, 43, .94),
-            rgba(9, 4, 15, .94)
-        );
-
-    border: 1px solid var(--border);
-
-    border-radius: 20px;
-
-    text-align: left;
-
-    position: relative;
-
-    overflow: hidden;
-
-    transition: .3s;
-
-    box-shadow:
-        0 0 18px rgba(130, 0, 220, .12);
-}
-
-body.light .file-card {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.94),
-            rgba(241,232,255,.95)
-        );
-}
-
-.file-card:hover {
-    transform: translateY(-4px);
-
-    border-color: var(--primary);
-
-    box-shadow:
-        0 0 25px var(--shadow);
-}
-
-.file-card::after {
-    content: "";
-
-    position: absolute;
-
-    width: 100px;
-    height: 100px;
-
-    right: -50px;
-    top: -50px;
-
-    background: var(--primary);
-
-    filter: blur(50px);
-
-    opacity: .25;
-}
-
-/* TITLE */
-
-.file-title {
-    position: relative;
-    z-index: 1;
-
-    color: var(--primary);
-
-    font-size: 21px;
-
-    font-weight: bold;
-
-    text-shadow:
-        0 0 10px var(--shadow);
-}
-
-.file-desc {
-    position: relative;
-    z-index: 1;
-
-    margin-top: 8px;
-
-    color: var(--muted);
-
-    font-size: 13px;
-}
-
-/* KEY */
-
-.key-box {
-    position: relative;
-    z-index: 1;
-
-    margin-top: 18px;
-
-    padding: 16px;
-
-    border-radius: 12px;
-
-    background: rgba(0, 0, 0, .25);
-
-    border: 1px solid rgba(190, 60, 255, .25);
-
-    text-align: center;
-}
-
-.key-label {
-    color: var(--muted);
-
-    font-size: 10px;
-
-    letter-spacing: 3px;
-
-    margin-bottom: 8px;
-}
-
-.key {
-    color: #d789ff;
-
-    font-size: 22px;
-
-    font-weight: bold;
-
-    letter-spacing: 3px;
-
-    text-shadow:
-        0 0 12px #a600ff;
-}
-
-/* BUTTON */
-
-.download {
-    position: relative;
-    z-index: 1;
-
-    display: block;
-
-    width: 100%;
-
-    margin-top: 18px;
-
-    padding: 16px;
-
-    border-radius: 12px;
-
-    text-align: center;
-
-    text-decoration: none;
-
-    color: white;
-
-    font-size: 14px;
-
-    font-weight: bold;
-
-    letter-spacing: 2px;
-
-    background:
-        linear-gradient(
-            90deg,
-            #6500c9,
-            #b000ff,
-            #6500c9
-        );
-
-    background-size: 200% 100%;
-
-    box-shadow:
-        0 0 18px rgba(160, 0, 255, .45);
-
-    transition: .3s;
-}
-
-.download:hover {
-    background-position: 100% 0;
-
-    transform: translateY(-2px);
-
-    box-shadow:
-        0 0 30px rgba(190, 0, 255, .7);
-}
-
-.download:active {
-    transform: scale(.98);
-}
-
-/* FOOTER */
-
-.footer {
-    text-align: center;
-
-    margin-top: 25px;
-    padding-top: 20px;
-
-    border-top: 1px solid var(--border);
-
-    color: var(--primary);
-
-    font-size: 12px;
-
-    font-weight: bold;
-
-    letter-spacing: 4px;
-
-    text-shadow:
-        0 0 10px var(--shadow);
-}
-
-/* RESPONSIVE */
-
-@media(max-width: 450px) {
-
-    body {
-        padding: 15px 10px;
-    }
-
-    .hero {
-        padding: 32px 18px 25px;
-    }
-
-    .logo {
-        font-size: 52px;
-    }
-
-    h1 {
-        font-size: 25px;
-        letter-spacing: 4px;
-    }
-
-    .file-card {
-        padding: 20px;
-    }
-}
 </style>
 </head>
-
 <body>
 
+<audio id="bgMusic" loop preload="auto">
+  <source src="music.mp3" type="audio/mpeg">
+</audio>
+
+<button id="musicBtn" class="music-control" onclick="toggleMusic()" aria-label="Music ON/OFF">
+  🎵 <span id="musicText">MUSIC OFF</span>
+</button>
+
+<canvas id="particles"></canvas>
+
+<section id="gate">
+  <div class="gate-card">
+    <div class="logo">◆</div>
+    <h1>XITERZ 969</h1>
+    <div class="sub">GAMING ACCESS CENTER</div>
+    <input id="keyInput" type="password" placeholder="MASUKKAN ACCESS KEY" autocomplete="off">
+    <button class="btn" onclick="login()">⚡ UNLOCK ACCESS</button>
+    <div id="gateMsg"></div>
+  </div>
+</section>
+
+<main id="app" class="hidden">
+<header>
+  <div class="brand">XITERZ 969</div>
+  <button class="mode" onclick="toggleMode()">☀️ LIGHT</button>
+</header>
+
 <div class="container">
+  <section class="hero">
+    <div class="hero-icon">◆</div>
+    <h2>XITERZ 969</h2>
+    <p>GAMING FILE CENTER</p>
+    <div class="status"><span class="dot"></span>SYSTEM ONLINE</div>
+  </section>
 
-    <div class="topbar">
-
-        <div class="brand">
-            XITERZ 969
-        </div>
-
-        <button
-            class="mode-btn"
-            onclick="toggleMode()"
-            id="modeButton"
-        >
-            ☀️ LIGHT
-        </button>
-
+  <section class="card">
+    <h3>⚡ ZYTRON INTERNEL ⚡</h3>
+    <p>ZYTRON PRO INTERNAL</p>
+    <div class="keybox">
+      <span class="keylabel">🔑 ACCESS KEY</span>
+      <span class="keyvalue">ZyTrial</span>
     </div>
+    <a class="btn download" href="https://www.mediafire.com/file/ag0x9gd04caelhe/ZYTRON+PRO+INTERNAL.apk/file" target="_blank" rel="noopener">⚡ DOWNLOAD ZYTRON</a>
+  </section>
 
+  <section class="card">
+    <h3>✅ USE THIS FF MAX</h3>
+    <p>Free Fire MAX 2.130.1</p>
+    <a class="btn download" href="https://www.mediafire.com/file/8k3oqgknrx709f3/Free+Fire+MAX_2.130.1.apks/file" target="_blank" rel="noopener">🎮 DOWNLOAD FF MAX</a>
+  </section>
 
-    <div class="hero">
-
-        <div class="logo">
-            ◈
-        </div>
-
-        <h1>
-            XITERZ 969
-        </h1>
-
-        <div class="subtitle">
-            GAMING FILE CENTER
-        </div>
-
-        <div class="status">
-            <span class="dot"></span>
-            SYSTEM ONLINE
-        </div>
-
-
-        <!-- ZYTRON -->
-
-        <div class="file-card">
-
-            <div class="file-title">
-                ⚡ ZYTRON INTERNEL ⚡
-            </div>
-
-            <div class="file-desc">
-                ZYTRON PRO INTERNAL
-            </div>
-
-            <div class="key-box">
-
-                <div class="key-label">
-                    🔑 ACCESS KEY
-                </div>
-
-                <div class="key">
-                    ZyTrial
-                </div>
-
-            </div>
-
-            <a
-                class="download"
-                href="https://www.mediafire.com/file/ag0x9gd04caelhe/ZYTRON+PRO+INTERNAL.apk/file"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                ⚡ DOWNLOAD ZYTRON
-            </a>
-
-        </div>
-
-
-        <!-- FF MAX -->
-
-        <div class="file-card">
-
-            <div class="file-title">
-                ✅ USE THIS FF MAX
-            </div>
-
-            <div class="file-desc">
-                Free Fire MAX 2.130.1
-            </div>
-
-            <a
-                class="download"
-                href="https://www.mediafire.com/file/8k3oqgknrx709f3/Free+Fire+MAX_2.130.1.apks/file"
-                target="_blank"
-                rel="noopener noreferrer"
-            >
-                🎮 DOWNLOAD FF MAX
-            </a>
-
-        </div>
-
-
-        <div class="footer">
-            CREDIT BY XITERZ 969
-        </div>
-
-    </div>
-
+  <footer>CREDIT BY XITERZ 969</footer>
 </div>
+</main>
 
+<div id="toast"></div>
 
 <script>
+/* =========================
+   ACCESS KEYS
+   Tambahkan key lain di array ini jika diperlukan.
+   ========================= */
+const KEYS = ["ZyTrial"];
 
-function toggleMode() {
-
-    document.body.classList.toggle("light");
-
-    const button =
-        document.getElementById("modeButton");
-
-    if (document.body.classList.contains("light")) {
-
-        button.innerHTML = "🌙 DARK";
-
-        localStorage.setItem(
-            "xiterz_mode",
-            "light"
-        );
-
-    } else {
-
-        button.innerHTML = "☀️ LIGHT";
-
-        localStorage.setItem(
-            "xiterz_mode",
-            "dark"
-        );
-    }
+function login(){
+  const input=document.getElementById("keyInput").value.trim();
+  const msg=document.getElementById("gateMsg");
+  if(!KEYS.includes(input)){
+    msg.style.color="var(--danger)";
+    msg.textContent="✖ ACCESS KEY INVALID";
+    document.querySelector(".gate-card").animate(
+      [{transform:"translateX(-7px)"},{transform:"translateX(7px)"},{transform:"translateX(0)"}],
+      {duration:240}
+    );
+    return;
+  }
+  localStorage.setItem("xiterz_access","1");
+  document.getElementById("gate").classList.add("hidden");
+  document.getElementById("app").classList.remove("hidden");
+  showToast("✓ ACCESS GRANTED");
 }
 
-
-/* Simpan mode yang terakhir dipakai */
-
-const savedMode =
-    localStorage.getItem("xiterz_mode");
-
-if (savedMode === "light") {
-
-    document.body.classList.add("light");
-
-    document.getElementById("modeButton").innerHTML =
-        "🌙 DARK";
+function toggleMode(){
+  document.body.classList.toggle("light");
+  localStorage.setItem("xiterz_mode",document.body.classList.contains("light")?"light":"dark");
+  document.querySelector(".mode").textContent =
+    document.body.classList.contains("light") ? "🌙 DARK" : "☀️ LIGHT";
 }
+
+function showToast(text){
+  const t=document.getElementById("toast");
+  t.textContent=text;t.classList.add("show");
+  setTimeout(()=>t.classList.remove("show"),1800);
+}
+
+document.getElementById("keyInput").addEventListener("keydown",e=>{
+  if(e.key==="Enter") login();
+});
+
+if(localStorage.getItem("xiterz_mode")==="light") toggleMode();
+
+/* Particle background */
+const canvas=document.getElementById("particles"),ctx=canvas.getContext("2d");
+let w,h,particles=[];
+function resize(){
+  w=canvas.width=innerWidth*devicePixelRatio;
+  h=canvas.height=innerHeight*devicePixelRatio;
+  canvas.style.width=innerWidth+"px";canvas.style.height=innerHeight+"px";
+  ctx.setTransform(devicePixelRatio,0,0,devicePixelRatio,0,0);
+}
+function makeParticles(){
+  particles=Array.from({length:55},()=>({
+    x:Math.random()*innerWidth,y:Math.random()*innerHeight,
+    vx:(Math.random()-.5)*.35,vy:(Math.random()-.5)*.35,
+    r:Math.random()*1.8+.5
+  }));
+}
+function draw(){
+  ctx.clearRect(0,0,innerWidth,innerHeight);
+  const light=document.body.classList.contains("light");
+  particles.forEach(p=>{
+    p.x+=p.vx;p.y+=p.vy;
+    if(p.x<0||p.x>innerWidth)p.vx*=-1;
+    if(p.y<0||p.y>innerHeight)p.vy*=-1;
+    ctx.beginPath();ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+    ctx.fillStyle=light?"rgba(105,0,255,.38)":"rgba(205,80,255,.65)";
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+addEventListener("resize",()=>{resize();makeParticles()});
+resize();makeParticles();draw();
+
+const music = document.getElementById("bgMusic");
+const musicBtn = document.getElementById("musicBtn");
+const musicText = document.getElementById("musicText");
+
+function updateMusicButton(){
+  const on = !music.paused;
+  musicBtn.classList.toggle("on", on);
+  musicText.textContent = on ? "MUSIC ON" : "MUSIC OFF";
+  musicBtn.firstChild.textContent = on ? "🔊 " : "🎵 ";
+}
+
+function toggleMusic(){
+  if(music.paused){
+    music.play().then(updateMusicButton).catch(()=>{
+      showToast("⚠️ Tekan tombol lagi untuk memulai musik");
+    });
+  }else{
+    music.pause();
+    updateMusicButton();
+  }
+}
+
+music.addEventListener("play", updateMusicButton);
+music.addEventListener("pause", updateMusicButton);
 
 </script>
-
 </body>
     </html>
